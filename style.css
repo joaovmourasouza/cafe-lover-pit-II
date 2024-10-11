@@ -28,6 +28,15 @@ section {
     max-width: 1200px;
 }
 
+.header section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+
 .header {
     position: fixed;
     top: 0;
@@ -36,14 +45,22 @@ section {
     z-index: 99;
     border-bottom: var(--border);
     backdrop-filter: blur(10px);
+    padding: 0.5px 0;
+    font-size: 0.8rem;
+    line-height: 1.2;
 }
 
-.header section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+.header .logo img {
+    max-height: 50px;
+}
+
+.navbar a {
+    padding: 0 10px;
+}
+
+.icons img {
+    max-height: 15px;
+    margin: 0 5px;
 }
 
 .navbar a {
@@ -57,11 +74,6 @@ section {
     border-bottom: .1rem solid var(--main-color);
     padding-bottom: .5rem;
     font-size: 1.3rem;
-}
-
-.icons img {
-    margin: 1rem;
-    cursor: pointer;
 }
 
 .icons img:hover {
@@ -229,9 +241,9 @@ section {
 .footer {
     background: var(--black);
     text-align: center;
-    padding: 10px 0; /* Reduz o espaçamento vertical */
-    font-size: 0.875rem; /* Ajusta o tamanho da fonte para um rodapé mais compacto */
-    line-height: 1.2; /* Diminui o espaçamento entre linhas */
+    padding: 10px 0;
+    font-size: 0.875rem;
+    line-height: 1.2;
 }
 
 .footer .share {
