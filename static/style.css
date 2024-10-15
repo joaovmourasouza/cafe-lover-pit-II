@@ -262,3 +262,115 @@ section {
 .footer .share img:hover {
     background: var(--main-color);
 }
+
+/* Estilo para o fundo desfocado */
+.modal-open .home-container,
+.modal-open .header,
+.modal-open .about-container,
+.modal-open .menu-container,
+.modal-open .review-container,
+.modal-open .footer {
+    filter: blur(8px); /* Intensidade do desfoque */
+    pointer-events: none; /* Desativa interações com o fundo */
+}
+
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 1000; /* Fica sobre o conteúdo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro mais opaco */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px); /* Desfoque leve no próprio modal */
+}
+
+.modal-content {
+    background-color: var(--black); /* Usando a cor da paleta */
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px; /* Mais largo para acomodar o conteúdo */
+    text-align: center;
+    position: relative;
+    border: var(--border); /* Aplicando a borda do tema */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5); /* Adiciona sombra */
+}
+
+.modal-content h2 {
+    color: var(--main-color); /* Cor principal */
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.modal-content label {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.modal-content input[type="email"],
+.modal-content input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background-color: #222;
+    border: var(--border);
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.modal-content input[type="email"]::placeholder,
+.modal-content input[type="password"]::placeholder {
+    color: #aaa;
+}
+
+.modal-content button {
+    background: var(--main-color);
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.modal-content button:hover {
+    background: #fff;
+    color: var(--main-color);
+    border: var(--border);
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--main-color);
+}
+
+.close:hover {
+    color: #fff;
+}
+
+.modal-content p {
+    margin-top: 15px;
+    color: #ccc;
+}
+
+.modal-content p a {
+    color: var(--main-color);
+    text-decoration: underline;
+}
+
+.modal-content p a:hover {
+    color: #fff;
+}

@@ -9,8 +9,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-    <title>Coffe Lover</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Coffee Lover</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
@@ -26,12 +26,17 @@
                 <a href="#reviews">Avaliações</a>
             </nav>
             <div class="icons">
-                <img src="assets/img/search.png" alt="search" width="30px" height="30px" href="#search">
-                <img src="assets/img/cart.png" alt="cart" width="30px" height="30px" href="#cart">
-                <img src="assets/img/account.png" alt="cart" width="30px" height="30px" href="#account">
+                <img src="{{ url_for('static', filename='img/search.png') }}" alt="search" width="30px" height="30px">
+                <a id="cart-icon" href="cart.html">
+                    <img src="{{ url_for('static', filename='img/cart.png') }}" alt="cart"    width="30px" height="30px">
+                </a>
+                <a id="login-icon" href="javascript:void(0)" onclick="openLoginForm()">
+                    <img src="{{ url_for('static', filename='img/account.png') }}" alt="login" width="30px" height="30px">
+                </a>
             </div>
         </section>
     </header>
+
     <div class="home-container">
         <section id="home">
             <div class="content">
@@ -43,20 +48,41 @@
             </div>
         </section>
     </div>
+
     <section id="about" class="about-container">
         <h2 class="title">Sobre <span>Nós</span></h2>
         <div class="row">
-            <div class="continer-image">
+            <div class="container-image">
                 <img src="https://i.ibb.co/M7SM4tD/about-img.jpg" alt="about-img" border="0">
             </div>
             <div class="content">
-                <h3>Por que escolher o melhor cafe?</h3>
+                <h3>Por que escolher o melhor café?</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum dolor quae ullam velit iusto vitae
                     aliquid, illum dolorem minima optio molestias doloribus, asperiores excepturi laboriosam harum,
                     repellendus repudiandae in neque?</p>
                 <a href="#menu" class="btn">Comprar</a>
             </div>
+        </div>
     </section>
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginForm()">&times;</span>
+            <h2>Login</h2>
+            <form action="/submit-login" method="POST">
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Entrar</button>
+            </form>
+            <p>Ainda não tem uma conta? <a href="/signup">Cadastre-se</a></p>
+        </div>
+    </div>
+
     <section id="menu" class="menu-container">
         <h2 class="title">Nossos <span>Produtos</span></h2>
         <div class="box-container">
@@ -102,52 +128,55 @@
         <h2 class="title">Nossos <span>Clientes</span></h2>
         <div class="box-container">
             <div class="box">
-                <img src="https://i.ibb.co/8dT8L8V/quote-img.png" alt="quote-img" border="0">
+                <img src="https://i.ibb.co/8dT8L8V/quote-img.png" alt="quote-img">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.</p>
-                <img class="user" src="https://i.ibb.co/c23H6vN/pic-1.png" alt="pic-1" border="0">
+                <img class="user" src="https://i.ibb.co/c23H6vN/pic-1.png" alt="pic-1">
                 <h3>João</h3>
                 <div class="stars">
-                    <img src="assets/img/full-star.png" alt="full-star" width="30px" height="30px">
-                    <img src="assets/img/full-star.png" alt="full-star" width="30px" height="30px">
-                    <img src="assets/img/full-star.png" alt="full-star" width="30px" height="30px">
-                    <img src="assets/img/full-star.png" alt="full-star" width="30px" height="30px">
-                    <img src="assets/img/half-star.png" alt="half-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/half-star.png') }}" alt="half-star" width="30px" height="30px">
                 </div>
             </div>
             <div class="box">
-                <img src="https://i.ibb.co/8dT8L8V/quote-img.png" alt="quote-img" border="0">
+                <img src="https://i.ibb.co/8dT8L8V/quote-img.png" alt="quote-img">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.</p>
-                <img class="user" src="https://i.ibb.co/4JLPK4b/pic-2.png" alt="pic-2" border="0">
+                <img class="user" src="https://i.ibb.co/4JLPK4b/pic-2.png" alt="pic-2">
                 <h3>Maria</h3>
                 <div class="stars">
-                    <img src="assets/img/full-star.png" alt="full-star" width="30px" height="30px">
-                    <img src="assets/img/full-star.png" alt="full-star" width="30px" height="30px">
-                    <img src="assets/img/full-star.png" alt="full-star" width="30px" height="30px">
-                    <img src="assets/img/full-star.png" alt="full-star" width="30px" height="30px">
-                    <img src="assets/img/full-star.png" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
                 </div>
             </div>
             <div class="box">
-                <img src="https://i.ibb.co/8dT8L8V/quote-img.png" alt="quote-img" border="0">
+                <img src="https://i.ibb.co/8dT8L8V/quote-img.png" alt="quote-img">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.</p>
-                <img class="user" src="https://i.ibb.co/3s9j3Y7/pic-3.png" alt="pic-3" border="0">
+                <img class="user" src="https://i.ibb.co/3s9j3Y7/pic-3.png" alt="pic-3">
                 <h3>Pedro</h3>
                 <div class="stars">
-                    <img src="assets/img/full-star.png" alt="full-star" width="30px" height="30px">
-                    <img src="assets/img/full-star.png" alt="full-star" width="30px" height="30px">
-                    <img src="assets/img/full-star.png" alt="full-star" width="30px" height="30px">
-                    <img src="assets/img/full-star.png" alt="full-star" width="30px" height="30px">
-                    <img src="assets/img/half-star.png" alt="half-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/half-star.png') }}" alt="half-star" width="30px" height="30px">
                 </div>
             </div>
+        </div>
     </section>
     <section class="footer">
         <div class="share">
-            <img src="assets/img/instagram.png" alt="instagram" width="30px" height="30px">
-            <img src="assets/img/facebook.png" alt="facebook" width="30px" height="30px">
-            <img src="assets/img/twitter.png" alt="twitter" width="30px" height="30px">
-            <img src="assets/img/youtube.png" alt="youtube" width="30px" height="30px">
+            <img src="{{ url_for('static', filename='img/instagram.png') }}" alt="instagram" width="30px" height="30px">
+            <img src="{{ url_for('static', filename='img/facebook.png') }}" alt="facebook" width="30px" height="30px">
+            <img src="{{ url_for('static', filename='img/twitter.png') }}" alt="twitter" width="30px" height="30px">
+            <img src="{{ url_for('static', filename='img/youtube.png') }}" alt="youtube" width="30px" height="30px">
         </div>
-    </section>
+    </section>    
+    <script src="script.js"></script>
 </body>
+
 </html>
