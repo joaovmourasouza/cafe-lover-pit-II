@@ -27,8 +27,8 @@
             </nav>
             <div class="icons">
                 <img src="{{ url_for('static', filename='img/search.png') }}" alt="search" width="30px" height="30px">
-                <a id="cart-icon" href="cart.html">
-                    <img src="{{ url_for('static', filename='img/cart.png') }}" alt="cart"    width="30px" height="30px">
+                <a id="cart-icon" href="javascript:void(0)" onclick="openCart()">
+                    <img src="{{ url_for('static', filename='img/cart.png') }}" alt="cart" width="30px" height="30px">
                 </a>
                 <a id="login-icon" href="javascript:void(0)" onclick="openLoginForm()">
                     <img src="{{ url_for('static', filename='img/account.png') }}" alt="login" width="30px" height="30px">
@@ -82,7 +82,17 @@
             <p>Ainda não tem uma conta? <a href="/signup">Cadastre-se</a></p>
         </div>
     </div>
-
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Carrinho de Compras</h2>
+            <div id="cart-items">
+                <!-- Os itens do carrinho serão mostrados aqui -->
+            </div>
+            <h3>Total: R$ <span id="cart-total">0,00</span></h3>
+            <button onclick="checkout()">Finalizar Pedido</button>
+        </div>
+    </div>
     <section id="menu" class="menu-container">
         <h2 class="title">Nossos <span>Produtos</span></h2>
         <div class="box-container">
@@ -90,37 +100,37 @@
                 <img src="https://i.ibb.co/XkGk0YY/menu-1.png" alt="menu-1" border="0">
                 <h3>Café Latte</h3>
                 <div class="price">R$12,99 <span>R$16,99</span></div>
-                <a href="#" class="btn">Adicionar ao Carrinho</a>
+                <a href="#" class="btn" onclick="addToCart('cafe Latte', 12.99)">Adicionar ao Carrinho</a>
             </div>
             <div class="box">
                 <img src="https://i.ibb.co/4PvZRWh/menu-2.png" alt="menu-2" border="0">
                 <h3>Cappuccino</h3>
                 <div class="price">R$14,99 <span>R$18,99</span></div>
-                <a href="#" class="btn">Adicionar ao Carrinho</a>
+                <a href="#" class="btn" onclick="addToCart('cappuccino', 14.99)">Adicionar ao Carrinho</a>
             </div>
             <div class="box">
                 <img src="https://i.ibb.co/T1KGT8s/menu-3.png" alt="menu-3" border="0">
                 <h3>Mocha</h3>
                 <div class="price">R$16,49 <span>R$19,99</span></div>
-                <a href="#" class="btn">Adicionar ao Carrinho</a>
+                <a href="#" class="btn" onclick="addToCart('mocha', 16.49)">Adicionar ao Carrinho</a>
             </div>
             <div class="box">
                 <img src="https://i.ibb.co/bP461r8/menu-4.png" alt="menu-4" border="0">
                 <h3>Macchiato</h3>
                 <div class="price">R$13,49 <span>R$17,49</span></div>
-                <a href="#" class="btn">Adicionar ao Carrinho</a>
+                <a href="#" class="btn" onclick="addToCart('macchiato', 13.49)">Adicionar ao Carrinho</a>
             </div>
             <div class="box">
                 <img src="https://i.ibb.co/6NxVCdw/menu-5.png" alt="menu-5" border="0">
                 <h3>Americano</h3>
                 <div class="price">R$10,99 <span>R$14,99</span></div>
-                <a href="#" class="btn">Adicionar ao Carrinho</a>
+                <a href="#" class="btn" onclick="addToCart('americano', 10.99)">Adicionar ao Carrinho</a>
             </div>
             <div class="box">
                 <img src="https://i.ibb.co/tb0H4tV/menu-6.png" alt="menu-6" border="0">
                 <h3>Frappuccino</h3>
                 <div class="price">R$18,99 <span>R$22,99</span></div>
-                <a href="#" class="btn">Adicionar ao Carrinho</a>
+                <a href="#" class="btn" onclick="addToCart('frappuccino', 18.99)">Adicionar ao Carrinho</a>
             </div>
         </div>
     </section>
