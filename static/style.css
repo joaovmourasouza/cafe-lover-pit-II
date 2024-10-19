@@ -420,7 +420,6 @@ section {
     font-weight: bold;
 }
 
-/* Estilos para os novos modais */
 .modal {
     display: none;
     position: fixed;
