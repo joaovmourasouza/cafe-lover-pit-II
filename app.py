@@ -10,6 +10,34 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+def init_db():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    with open('schema.sql', 'r') as f:
+        cursor.executescript(f.read())
+
+    cursor.execute("SELECT * FROM users WHERE email = ?", ('joao.souza@gmail.com',))
+    user = cursor.fetchone()
+
+    if not user:
+        password_hashed = generate_password_hash('123456', method='pbkdf2:sha256', salt_length=8)
+        cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", ('joao.souza@gmail.com', password_hashed))
+
+    cursor.execute("SELECT * FROM products WHERE name = ?", ('cafe Latte',))
+    product = cursor.fetchone()
+
+    if not product:
+        cursor.execute("INSERT INTO products (name, price) VALUES (?, ?)", ('cafe Latte', 12.99))
+        cursor.execute("INSERT INTO products (name, price) VALUES (?, ?)", ('cappuccino', 14.99))
+        cursor.execute("INSERT INTO products (name, price) VALUES (?, ?)", ('mocha', 16.49))
+        cursor.execute("INSERT INTO products (name, price) VALUES (?, ?)", ('macchiato', 13.49))
+        cursor.execute("INSERT INTO products (name, price) VALUES (?, ?)", ('americano', 10.99))
+        cursor.execute("INSERT INTO products (name, price) VALUES (?, ?)", ('frappuccino', 18.99))
+
+    conn.commit()
+    conn.close()
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -49,4 +77,5 @@ def signup():
     return render_template('signup.html')
 
 if __name__ == "__main__":
+    init_db()
     app.run(debug=True, port=8000)
