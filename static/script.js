@@ -61,16 +61,51 @@ function updateCart() {
     document.getElementById('cart-total').textContent = cartTotal.toFixed(2);
 }
 
-// Função para finalizar o pedido
+// Função para finalizar o pedido e abrir o modal de entrega
 function checkout() {
     if (cart.length === 0) {
         alert("Seu carrinho está vazio!");
         return;
     }
 
-    // Aqui você pode enviar o carrinho para o backend, por exemplo, via AJAX
-    alert("Pedido finalizado! Total: R$ " + document.getElementById('cart-total').textContent);
-    cart = [];  // Limpa o carrinho
-    updateCart();  // Atualiza a exibição do carrinho
-    closeCart();  // Fecha o modal
+    closeCart();  // Fecha o modal do carrinho
+    document.getElementById('deliveryModal').style.display = 'flex';  // Abre o modal de entrega
+}
+
+// Função para fechar o modal de entrega e abrir o modal de pagamento
+function nextToPayment() {
+    const deliveryForm = document.getElementById('delivery-form');
+    if (deliveryForm.checkValidity()) {
+        document.getElementById('deliveryModal').style.display = 'none';
+        document.getElementById('paymentModal').style.display = 'flex';
+    } else {
+        deliveryForm.reportValidity();  // Mostra os erros de validação, se houver
+    }
+}
+
+// Função para confirmar a compra e abrir o modal de sucesso
+function confirmPurchase() {
+    const paymentForm = document.getElementById('payment-form');
+    if (paymentForm.checkValidity()) {
+        document.getElementById('paymentModal').style.display = 'none';
+        document.getElementById('successModal').style.display = 'flex';
+        cart = [];  // Limpa o carrinho
+        updateCart();  // Atualiza o carrinho
+    } else {
+        paymentForm.reportValidity();  // Mostra os erros de validação, se houver
+    }
+}
+
+// Função para fechar o modal de sucesso e voltar à página inicial
+function closeSuccess() {
+    document.getElementById('successModal').style.display = 'none';
+    window.location.href = "#home";  // Redireciona para a página inicial
+}
+
+// Funções para fechar modais individuais
+function closeDelivery() {
+    document.getElementById('deliveryModal').style.display = 'none';
+}
+function closePayment() {
+    document.getElementById('paymentModal').style.display = 'none';
 }

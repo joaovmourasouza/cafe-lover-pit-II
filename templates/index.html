@@ -31,7 +31,8 @@
                     <img src="{{ url_for('static', filename='img/cart.png') }}" alt="cart" width="30px" height="30px">
                 </a>
                 <a id="login-icon" href="javascript:void(0)" onclick="openLoginForm()">
-                    <img src="{{ url_for('static', filename='img/account.png') }}" alt="login" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/account.png') }}" alt="login" width="30px"
+                        height="30px">
                 </a>
             </div>
         </section>
@@ -87,10 +88,58 @@
             <span class="close" onclick="closeCart()">&times;</span>
             <h2>Carrinho de Compras</h2>
             <div id="cart-items">
-                <!-- Os itens do carrinho serão mostrados aqui -->
             </div>
             <h3>Total: R$ <span id="cart-total">0,00</span></h3>
             <button onclick="checkout()">Finalizar Pedido</button>
+        </div>
+    </div>
+    <div id="deliveryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDelivery()">&times;</span>
+            <h2>Endereço de Entrega</h2>
+            <form id="delivery-form">
+                <div>
+                    <label for="address">Endereço:</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                <div>
+                    <label for="city">Cidade:</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                <div>
+                    <label for="zipcode">CEP:</label>
+                    <input type="text" id="zipcode" name="zipcode" required>
+                </div>
+                <button type="button" onclick="nextToPayment()">Próximo</button>
+            </form>
+        </div>
+    </div>
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePayment()">&times;</span>
+            <h2>Informações de Pagamento</h2>
+            <form id="payment-form">
+                <div>
+                    <label for="card-number">Número do Cartão:</label>
+                    <input type="text" id="card-number" name="card-number" required>
+                </div>
+                <div>
+                    <label for="card-expiration">Validade (MM/AA):</label>
+                    <input type="text" id="card-expiration" name="card-expiration" required>
+                </div>
+                <div>
+                    <label for="card-cvv">CVV:</label>
+                    <input type="text" id="card-cvv" name="card-cvv" required>
+                </div>
+                <button type="button" onclick="confirmPurchase()">Finalizar Compra</button>
+            </form>
+        </div>
+    </div>
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <h2>Compra realizada com sucesso!</h2>
+            <p>Obrigado pela sua compra. Seu pedido foi realizado com sucesso.</p>
+            <button type="button" onclick="closeSuccess()">OK</button>
         </div>
     </div>
     <section id="menu" class="menu-container">
@@ -100,37 +149,37 @@
                 <img src="https://i.ibb.co/XkGk0YY/menu-1.png" alt="menu-1" border="0">
                 <h3>Café Latte</h3>
                 <div class="price">R$12,99 <span>R$16,99</span></div>
-                <a href="#" class="btn" onclick="addToCart('cafe Latte', 12.99)">Adicionar ao Carrinho</a>
+                <a class="btn" onclick="addToCart('cafe Latte', 12.99)">Adicionar ao Carrinho</a>
             </div>
             <div class="box">
                 <img src="https://i.ibb.co/4PvZRWh/menu-2.png" alt="menu-2" border="0">
                 <h3>Cappuccino</h3>
                 <div class="price">R$14,99 <span>R$18,99</span></div>
-                <a href="#" class="btn" onclick="addToCart('cappuccino', 14.99)">Adicionar ao Carrinho</a>
+                <a class="btn" onclick="addToCart('cappuccino', 14.99)">Adicionar ao Carrinho</a>
             </div>
             <div class="box">
                 <img src="https://i.ibb.co/T1KGT8s/menu-3.png" alt="menu-3" border="0">
                 <h3>Mocha</h3>
                 <div class="price">R$16,49 <span>R$19,99</span></div>
-                <a href="#" class="btn" onclick="addToCart('mocha', 16.49)">Adicionar ao Carrinho</a>
+                <a class="btn" onclick="addToCart('mocha', 16.49)">Adicionar ao Carrinho</a>
             </div>
             <div class="box">
                 <img src="https://i.ibb.co/bP461r8/menu-4.png" alt="menu-4" border="0">
                 <h3>Macchiato</h3>
                 <div class="price">R$13,49 <span>R$17,49</span></div>
-                <a href="#" class="btn" onclick="addToCart('macchiato', 13.49)">Adicionar ao Carrinho</a>
+                <a class="btn" onclick="addToCart('macchiato', 13.49)">Adicionar ao Carrinho</a>
             </div>
             <div class="box">
                 <img src="https://i.ibb.co/6NxVCdw/menu-5.png" alt="menu-5" border="0">
                 <h3>Americano</h3>
                 <div class="price">R$10,99 <span>R$14,99</span></div>
-                <a href="#" class="btn" onclick="addToCart('americano', 10.99)">Adicionar ao Carrinho</a>
+                <a class="btn" onclick="addToCart('americano', 10.99)">Adicionar ao Carrinho</a>
             </div>
             <div class="box">
                 <img src="https://i.ibb.co/tb0H4tV/menu-6.png" alt="menu-6" border="0">
                 <h3>Frappuccino</h3>
                 <div class="price">R$18,99 <span>R$22,99</span></div>
-                <a href="#" class="btn" onclick="addToCart('frappuccino', 18.99)">Adicionar ao Carrinho</a>
+                <a class="btn" onclick="addToCart('frappuccino', 18.99)">Adicionar ao Carrinho</a>
             </div>
         </div>
     </section>
@@ -143,11 +192,16 @@
                 <img class="user" src="https://i.ibb.co/c23H6vN/pic-1.png" alt="pic-1">
                 <h3>João</h3>
                 <div class="stars">
-                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
-                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
-                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
-                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
-                    <img src="{{ url_for('static', filename='img/half-star.png') }}" alt="half-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px"
+                        height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px"
+                        height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px"
+                        height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px"
+                        height="30px">
+                    <img src="{{ url_for('static', filename='img/half-star.png') }}" alt="half-star" width="30px"
+                        height="30px">
                 </div>
             </div>
             <div class="box">
@@ -156,11 +210,16 @@
                 <img class="user" src="https://i.ibb.co/4JLPK4b/pic-2.png" alt="pic-2">
                 <h3>Maria</h3>
                 <div class="stars">
-                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
-                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
-                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
-                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
-                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px"
+                        height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px"
+                        height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px"
+                        height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px"
+                        height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px"
+                        height="30px">
                 </div>
             </div>
             <div class="box">
@@ -169,11 +228,16 @@
                 <img class="user" src="https://i.ibb.co/3s9j3Y7/pic-3.png" alt="pic-3">
                 <h3>Pedro</h3>
                 <div class="stars">
-                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
-                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
-                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
-                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px" height="30px">
-                    <img src="{{ url_for('static', filename='img/half-star.png') }}" alt="half-star" width="30px" height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px"
+                        height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px"
+                        height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px"
+                        height="30px">
+                    <img src="{{ url_for('static', filename='img/full-star.png') }}" alt="full-star" width="30px"
+                        height="30px">
+                    <img src="{{ url_for('static', filename='img/half-star.png') }}" alt="half-star" width="30px"
+                        height="30px">
                 </div>
             </div>
         </div>
@@ -185,7 +249,7 @@
             <img src="{{ url_for('static', filename='img/twitter.png') }}" alt="twitter" width="30px" height="30px">
             <img src="{{ url_for('static', filename='img/youtube.png') }}" alt="youtube" width="30px" height="30px">
         </div>
-    </section>    
+    </section>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 
